@@ -4,7 +4,7 @@
 
 
 
-# 📦 Project Setup 
+# 📦 Project Setup.
 
 ---
 

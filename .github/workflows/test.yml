@@ -79,8 +79,8 @@ jobs:
         with:
           push: true
           tags: |
-            Hanyyoussef4/module8_is601:latest
-            Hanyyoussef4/module8_is601:${{ github.sha }}
+            hany25/module8_is601:latest
+            hany25/module8_is601:${{ github.sha }}
           platforms: linux/amd64,linux/arm64
-          cache-from: type=registry,ref=Hanyyoussef4/module8_is601:cache
+          cache-from: type=registry,ref=hany25/module8_is601:cache
           cache-to: type=inline,mode=max
