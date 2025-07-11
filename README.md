@@ -1,270 +1,148 @@
-## 🚀 FastAPI Calculator
+# 🚀 FastAPI Calculator
 
-![CI/CD](https://github.com/Hanyyoussef4/module8_is601/actions/workflows/test.yml/badge.svg)
+[![CI/CD](https://github.com/Hanyyoussef4/module8_is601/actions/workflows/test.yml/badge.svg)](https://github.com/Hanyyoussef4/module8_is601/actions/workflows/test.yml)
 
-
-
-# 📦 Project Setup.
+A robust web-based calculator built with FastAPI, Uvicorn, and Playwright. Includes unit, integration, and end-to-end tests, and is fully Dockerized for easy deployment.
 
 ---
 
-# 🧩 1. Install Homebrew (Mac Only)
+## 📦 Table of Contents
 
-> Skip this step if you're on Windows.
+* [Links](#links)
+* [Features](#features)
+* [Screenshots](#screenshots)
+* [Getting Started](#getting-started)
 
-Homebrew is a package manager for macOS.  
-You’ll use it to easily install Git, Python, Docker, etc.
-
-**Install Homebrew:**
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-**Verify Homebrew:**
-
-```bash
-brew --version
-```
-
-If you see a version number, you're good to go.
+  * [Prerequisites](#prerequisites)
+  * [Running Locally](#running-locally)
+  * [Docker](#docker)
+* [Testing](#testing)
+* [Directory Structure](#directory-structure)
+* [License](#license)
 
 ---
 
-# 🧩 2. Install and Configure Git
+## 🔗 Links
 
-## Install Git
+* **GitHub Repository**: [Hanyyoussef4/module8\_is601](https://github.com/Hanyyoussef4/module8_is601)
+* **Docker Hub Image**: [hany25/module8_is601](https://hub.docker.com/repository/docker/hany25/module8_is601/general)
 
-- **MacOS (using Homebrew)**
-
-```bash
-brew install git
-```
-
-- **Windows**
-
-Download and install [Git for Windows](https://git-scm.com/download/win).  
-Accept the default options during installation.
-
-**Verify Git:**
-
-```bash
-git --version
-```
+* **CI Workflow**: [View Test Results](https://github.com/Hanyyoussef4/module8_is601/actions/workflows/test.yml)
 
 ---
 
-## Configure Git Globals
+## ✨ Features
 
-Set your name and email so Git tracks your commits properly:
-
-```bash
-git config --global user.name "Your Name"
-git config --global user.email "your_email@example.com"
-```
-
-Confirm the settings:
-
-```bash
-git config --list
-```
+* **FastAPI**: High-performance async API framework.
+* **Uvicorn**: Lightning-fast ASGI server.
+* **Playwright E2E Tests**: Headless browser automation for full user flows.
+* **Unit & Integration Tests**: Pytest-based coverage on operations and endpoints.
+* **Health Check**: `/health` endpoint for container orchestration readiness.
+* **Dockerized**: Container image ensures consistency across environments.
 
 ---
 
-## Generate SSH Keys and Connect to GitHub
+## 📸 Screenshots
 
-> Only do this once per machine.
+All screenshot files are located in the `Screenshots/` directory:
 
-1. Generate a new SSH key:
-
-```bash
-ssh-keygen -t ed25519 -C "your_email@example.com"
-```
-
-(Press Enter at all prompts.)
-
-2. Start the SSH agent:
-
-```bash
-eval "$(ssh-agent -s)"
-```
-
-3. Add the SSH private key to the agent:
-
-```bash
-ssh-add ~/.ssh/id_ed25519
-```
-
-4. Copy your SSH public key:
-
-- **Mac/Linux:**
-
-```bash
-cat ~/.ssh/id_ed25519.pub | pbcopy
-```
-
-- **Windows (Git Bash):**
-
-```bash
-cat ~/.ssh/id_ed25519.pub | clip
-```
-
-5. Add the key to your GitHub account:
-   - Go to [GitHub SSH Settings](https://github.com/settings/keys)
-   - Click **New SSH Key**, paste the key, save.
-
-6. Test the connection:
-
-```bash
-ssh -T git@github.com
-```
-
-You should see a success message.
+* `GitHub Actions Workflow.png`
+  *Shows a successful CI run across build, test, and publish steps.*
+* `Application Running in Browser.png`
+  *Demonstrates the calculator UI rendered at **`http://localhost:8000`**.*
 
 ---
 
-# 🧩 3. Clone the Repository
+## 🛠️ Getting Started
 
-Now you can safely clone the course project:
+### Prerequisites
 
-```bash
-git clone <repository-url>
-cd <repository-directory>
-```
+* **Python** >= 3.10
+* **Git**
+* **(Optional) Docker & Docker Compose**
 
----
-
-# 🛠️ 4. Install Python 3.10+
-
-## Install Python
-
-- **MacOS (Homebrew)**
+### Running Locally
 
 ```bash
-brew install python
-```
+# 1. Clone repo
+git clone git@github.com:Hanyyoussef4/module8_is601.git
+cd module8_is601
 
-- **Windows**
-
-Download and install [Python for Windows](https://www.python.org/downloads/).  
-✅ Make sure you **check the box** `Add Python to PATH` during setup.
-
-**Verify Python:**
-
-```bash
-python3 --version
-```
-or
-```bash
-python --version
-```
-
----
-
-## Create and Activate a Virtual Environment
-
-(Optional but recommended)
-
-```bash
+# 2. Create & activate virtual env
 python3 -m venv venv
-source venv/bin/activate   # Mac/Linux
-venv\Scripts\activate.bat  # Windows
-```
+source venv/bin/activate  # Mac/Linux
+# venv\Scripts\activate.bat # Windows
 
-### Install Required Packages
-
-```bash
+# 3. Install Python deps
 pip install -r requirements.txt
+
+# 4. Start server
+uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
----
+Visit `http://localhost:8000` to use the calculator.
 
-# 🐳 5. (Optional) Docker Setup
-
-> Skip if Docker isn't used in this module.
-
-## Install Docker
-
-- [Install Docker Desktop for Mac](https://www.docker.com/products/docker-desktop/)
-- [Install Docker Desktop for Windows](https://www.docker.com/products/docker-desktop/)
-
-## Build Docker Image
+### Docker
 
 ```bash
-docker build -t <image-name> .
+# Build image
+docker build -t module8_is601-web .
+
+# Run container
+docker run -d -p 8000:8000 module8_is601-web
 ```
 
-## Run Docker Container
+OR via Compose:
 
 ```bash
-docker run -it --rm <image-name>
+docker-compose up --build -d
 ```
 
 ---
 
-# 🚀 6. Running the Project
+## 🧪 Testing
 
-- **Without Docker**:
+Activate your virtual environment first:
 
 ```bash
-python main.py
+source venv/bin/activate
 ```
 
-(or update this if the main script is different.)
-
-- **With Docker**:
+**Unit & Integration**
 
 ```bash
-docker run -it --rm <image-name>
+pytest --maxfail=1 --disable-warnings -q
 ```
 
----
-
-# 📝 7. Submission Instructions
-
-After finishing your work:
+**End-to-End (Playwright)**
 
 ```bash
-git add .
-git commit -m "Complete Module X"
-git push origin main
+PLAYWRIGHT_HEADLESS=0 pytest tests/e2e
 ```
 
-Then submit the GitHub repository link as instructed.
+Coverage reports are generated under `htmlcov/`.
 
 ---
 
-# 🔥 Useful Commands Cheat Sheet
+## 📂 Directory Structure
 
-| Action                         | Command                                          |
-| ------------------------------- | ------------------------------------------------ |
-| Install Homebrew (Mac)          | `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"` |
-| Install Git                     | `brew install git` or Git for Windows installer |
-| Configure Git Global Username  | `git config --global user.name "Your Name"`      |
-| Configure Git Global Email     | `git config --global user.email "you@example.com"` |
-| Clone Repository                | `git clone <repo-url>`                          |
-| Create Virtual Environment     | `python3 -m venv venv`                           |
-| Activate Virtual Environment   | `source venv/bin/activate` / `venv\Scripts\activate.bat` |
-| Install Python Packages        | `pip install -r requirements.txt`               |
-| Build Docker Image              | `docker build -t <image-name> .`                |
-| Run Docker Container            | `docker run -it --rm <image-name>`               |
-| Push Code to GitHub             | `git add . && git commit -m "message" && git push` |
-
----
-
-# 📋 Notes
-
-- Install **Homebrew** first on Mac.
-- Install and configure **Git** and **SSH** before cloning.
-- Use **Python 3.10+** and **virtual environments** for Python projects.
-- **Docker** is optional depending on the project.
+```
+module8_is601/
+├── app/
+│   └── operations/       # Arithmetic logic under test
+├── templates/
+│   └── index.html        # Frontend UI template
+├── tests/
+│   ├── unit/             # Unit tests for operations
+│   ├── integration/      # API endpoint tests
+│   └── e2e/              # Playwright end-to-end tests
+├── Dockerfile            # Production container build
+├── docker-compose.yml    # Local compose for dev
+├── requirements.txt      # Python dependencies
+├── test.yml              # GitHub CI workflow
+└── Screenshots/          # Submission screenshots
+    ├── GitHub Actions Workflow.png
+    └── Application Running in Browser.png
+```
 
 ---
-
-# 📎 Quick Links
-
-- [Homebrew](https://brew.sh/)
-- [Git Downloads](https://git-scm.com/downloads)
-- [Python Downloads](https://www.python.org/downloads/)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [GitHub SSH Setup Guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
