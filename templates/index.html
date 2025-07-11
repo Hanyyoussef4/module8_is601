@@ -3,6 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <title>FastAPI Calculator</title>
+  <style>
+    /* Center the container in the viewport */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    /* Card-like wrapper */
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      font-size: 1.75rem;
+    }
+
+    .inputs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .inputs label {
+      align-self: center;
+      font-weight: bold;
+    }
+
+    .inputs input {
+      width: 4rem;
+      padding: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-align: right;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .buttons button {
+      flex: 1 1 45%;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .buttons button:hover {
+      background-color: #0056b3;
+    }
+
+    #result {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
   <script defer>
     async function calculate(op) {
       const a = parseFloat(document.getElementById("a").value);
@@ -25,23 +103,25 @@
   </script>
 </head>
 <body>
-  <!-- This heading must match test_hello_world -->
-  <h1>Hello World</h1>
+  <div class="container">
+    <!-- This heading must match test_hello_world -->
+    <h1>Hello World</h1>
 
-  <div>
-    <label for="a">A:</label>
-    <input id="a" type="number" value="0" />
-    <label for="b">B:</label>
-    <input id="b" type="number" value="0" />
+    <div class="inputs">
+      <label for="a">A:</label>
+      <input id="a" type="number" value="0" />
+      <label for="b">B:</label>
+      <input id="b" type="number" value="0" />
+    </div>
+
+    <div class="buttons">
+      <button onclick="calculate('add')">Add</button>
+      <button onclick="calculate('subtract')">Subtract</button>
+      <button onclick="calculate('multiply')">Multiply</button>
+      <button onclick="calculate('divide')">Divide</button>
+    </div>
+
+    <div id="result"></div>
   </div>
-
-  <div style="margin-top:1em;">
-    <button onclick="calculate('add')">Add</button>
-    <button onclick="calculate('subtract')">Subtract</button>
-    <button onclick="calculate('multiply')">Multiply</button>
-    <button onclick="calculate('divide')">Divide</button>
-  </div>
-
-  <div id="result" style="margin-top:1em;font-weight:bold;"></div>
 </body>
 </html>
