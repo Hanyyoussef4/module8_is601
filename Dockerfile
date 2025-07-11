@@ -23,7 +23,10 @@ RUN groupadd -r appgroup && \
 
 # 3) Copy & install Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt \
+ && pip install --no-cache-dir --upgrade \
+    setuptools>=78.1.1 \
+    h11>=0.16.0
 
 # 4) Copy app code
 COPY . .
